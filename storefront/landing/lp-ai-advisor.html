@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meet Alex — Your Personal Pergola Expert | Pergola Pros</title>
+  <meta name="description" content="Alex is an AI pergola advisor who answers HOA questions, helps with sizing, explains installation, and finds your perfect match — instantly, 24/7.">
+  <meta property="og:title" content="Meet Alex — Your Personal Pergola Expert">
+  <meta property="og:description" content="Ask about HOA compliance, sizing, installation, materials. Alex has answers. No sales pressure, just expert guidance.">
+  <meta property="og:type" content="website">
+
+  <!-- Facebook Pixel — replace YOUR_PIXEL_ID -->
+  <script>
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+    document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', 'YOUR_PIXEL_ID');
+    fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1"></noscript>
+
+  <!-- Google Tag — replace G-XXXXXXXXXX -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+
+  <!-- PostHog stub -->
+  <script>
+    window.posthog = window.posthog || { capture: function(e, p) { console.debug('[PostHog]', e, p); } };
+  </script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="font-sans antialiased bg-white text-gray-900">
+
+  <!-- Header -->
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-gray-100 shadow-sm">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+      <a href="../index.html" class="flex items-center gap-2 shrink-0">
+        <span class="text-2xl" aria-hidden="true">🌿</span>
+        <span class="font-extrabold text-amber-900 text-lg tracking-tight">Pergola Pros</span>
+      </a>
+      <nav class="hidden md:flex items-center gap-6 text-sm text-gray-600 font-medium">
+        <a href="#what-alex-does" class="hover:text-amber-800 transition-colors">What Alex Does</a>
+        <a href="#conversation" class="hover:text-amber-800 transition-colors">See It in Action</a>
+        <a href="#products" class="hover:text-amber-800 transition-colors">Products</a>
+      </nav>
+      <button
+        onclick="openChat(); posthog.capture('cta_click', {variant:'ai-advisor', location:'nav'})"
+        class="shrink-0 bg-amber-800 hover:bg-amber-900 text-white px-4 py-2 rounded-full text-sm font-semibold transition-colors">
+        💬 Talk to Alex Now
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="bg-gradient-to-br from-slate-900 via-amber-950 to-amber-900 text-white overflow-hidden">
+    <div class="max-w-6xl mx-auto px-4 py-16 md:py-28">
+      <div class="grid md:grid-cols-2 gap-16 items-center">
+
+        <!-- Copy -->
+        <div>
+          <div class="inline-flex items-center gap-2 bg-amber-400/20 border border-amber-400/30 rounded-full px-4 py-1.5 mb-6 text-sm font-medium text-amber-200">
+            🤖 AI-Powered · Replies in seconds · Available 24/7
+          </div>
+          <h1 class="text-5xl md:text-6xl font-extrabold leading-none tracking-tight mb-6">
+            Meet Alex —<br>Your Personal<br><span class="text-amber-300">Pergola Expert</span>
+          </h1>
+          <p class="text-amber-100 text-lg leading-relaxed mb-4">
+            Alex isn't a chatbot that just says "add to cart." He's a knowledgeable advisor who understands pergola sizing, materials, HOA rules, installation, and local climate.
+          </p>
+          <p class="text-amber-200 text-base mb-10">
+            Ask him anything — he'll give you a real answer, not a sales pitch.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4">
+            <button
+              onclick="openChat(); posthog.capture('cta_click', {variant:'ai-advisor', location:'hero'})"
+              class="bg-amber-400 hover:bg-amber-300 text-amber-950 font-extrabold px-8 py-4 rounded-2xl text-lg transition-colors text-center shadow-xl">
+              💬 Ask Alex Now — Free
+            </button>
+            <a href="#conversation"
+               class="border-2 border-amber-300/60 text-amber-100 font-semibold px-8 py-4 rounded-2xl text-lg hover:bg-white/10 transition-colors text-center">
+              See a Sample Chat
+            </a>
+          </div>
+          <p class="text-amber-400/70 text-xs mt-5">No account required · No sales pressure · Just answers</p>
+        </div>
+
+        <!-- Alex Avatar Card -->
+        <div class="flex justify-center">
+          <div class="relative">
+            <!-- Glow -->
+            <div class="absolute inset-0 bg-amber-400/20 rounded-full blur-3xl scale-110 pointer-events-none"></div>
+            <!-- Card -->
+            <div class="relative bg-white rounded-3xl shadow-2xl overflow-hidden w-80 border border-white/20">
+              <!-- Header -->
+              <div class="bg-amber-800 px-6 py-5 flex items-center gap-4">
+                <div class="w-14 h-14 bg-amber-100 rounded-full flex items-center justify-center text-3xl shadow-inner shrink-0">
+                  🌿
+                </div>
+                <div>
+                  <div class="font-extrabold text-white text-lg leading-tight">Alex</div>
+                  <div class="text-amber-200 text-sm">Pergola Advisor · AI-Powered</div>
+                  <div class="flex items-center gap-1.5 mt-1">
+                    <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                    <span class="text-green-300 text-xs font-medium">Online now</span>
+                  </div>
+                </div>
+              </div>
+              <!-- Sample messages -->
+              <div class="bg-gray-50 p-5 space-y-3">
+                <div class="flex gap-3">
+                  <div class="w-7 h-7 bg-amber-100 rounded-full flex items-center justify-center text-sm shrink-0 mt-0.5">🌿</div>
+                  <div class="bg-white rounded-2xl rounded-tl-sm px-4 py-3 text-sm text-gray-700 shadow-sm max-w-xs leading-relaxed">
+                    Hi! I'm Alex. What's your backyard situation?
+                  </div>
+                </div>
+                <div class="flex justify-end">
+                  <div class="bg-amber-800 rounded-2xl rounded-tr-sm px-4 py-3 text-sm text-white max-w-xs leading-relaxed">
+                    I have a 12×14 patio and my HOA restricts colors to earth tones
+                  </div>
+                </div>
+                <div class="flex gap-3">
+                  <div class="w-7 h-7 bg-amber-100 rounded-full flex items-center justify-center text-sm shrink-0 mt-0.5">🌿</div>
+                  <div class="bg-white rounded-2xl rounded-tl-sm px-4 py-3 text-sm text-gray-700 shadow-sm max-w-xs leading-relaxed">
+                    Perfect — our Modern Aluminum 12×16 in Mocha Brown is HOA-friendly and fits your space. Want me to check current availability?
+                  </div>
+                </div>
+                <!-- Typing indicator -->
+                <div class="flex gap-3 items-end">
+                  <div class="w-7 h-7 bg-amber-100 rounded-full flex items-center justify-center text-sm shrink-0">🌿</div>
+                  <div class="bg-white rounded-2xl px-4 py-3 shadow-sm flex gap-1.5 items-center">
+                    <div class="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce" style="animation-delay:0ms"></div>
+                    <div class="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce" style="animation-delay:150ms"></div>
+                    <div class="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce" style="animation-delay:300ms"></div>
+                  </div>
+                </div>
+              </div>
+              <!-- Input row -->
+              <div class="bg-white border-t border-gray-100 px-4 py-3 flex items-center gap-3">
+                <div class="flex-1 bg-gray-100 rounded-full px-4 py-2 text-sm text-gray-400">Ask Alex anything…</div>
+                <div class="w-8 h-8 bg-amber-800 rounded-full flex items-center justify-center text-white text-sm shrink-0">↑</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust bar -->
+  <section class="bg-amber-800 text-amber-100 py-4">
+    <div class="max-w-5xl mx-auto px-4">
+      <div class="flex flex-wrap justify-center gap-x-10 gap-y-2 text-sm font-medium text-center">
+        <span>✓ No account required</span>
+        <span>✓ Answers in under 10 seconds</span>
+        <span>✓ Knows all 6 pergola models</span>
+        <span>✓ HOA &amp; permit guidance</span>
+        <span>✓ Available 24/7</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- What Alex Can Help With -->
+  <section id="what-alex-does" class="py-20 bg-gray-50">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-3xl md:text-4xl font-extrabold text-center mb-3">What Alex Can Help With</h2>
+      <p class="text-center text-gray-500 mb-14 text-lg">Real expertise, not scripted responses</p>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+
+        <div class="bg-white rounded-2xl p-6 border border-gray-100 hover:shadow-md transition-shadow group">
+          <div class="text-3xl mb-4" aria-hidden="true">📐</div>
+          <h3 class="font-bold text-gray-900 mb-2">Sizing & Fit</h3>
+          <p class="text-gray-600 text-sm leading-relaxed mb-4">Tell Alex your patio dimensions and he'll recommend the right pergola size — accounting for setbacks, clearance, and aesthetic proportion.</p>
+          <button onclick="openChat('My patio is 14x16 feet. What size pergola should I get?'); posthog.capture('topic_click', {variant:'ai-advisor', topic:'sizing'})"
+                  class="text-amber-800 font-semibold text-sm hover:underline transition-colors">
+            Ask about sizing →
+          </button>
+        </div>
+
+        <div class="bg-white rounded-2xl p-6 border border-gray-100 hover:shadow-md transition-shadow group">
+          <div class="text-3xl mb-4" aria-hidden="true">🏛️</div>
+          <h3 class="font-bold text-gray-900 mb-2">HOA Compliance</h3>
+          <p class="text-gray-600 text-sm leading-relaxed mb-4">Share your HOA restrictions and Alex will identify compliant options — colors, materials, dimensions, and setback rules covered.</p>
+          <button onclick="openChat('My HOA has color and size restrictions. Can you help me find a compliant pergola?'); posthog.capture('topic_click', {variant:'ai-advisor', topic:'hoa'})"
+                  class="text-amber-800 font-semibold text-sm hover:underline transition-colors">
+            Ask about HOA rules →
+          </button>
+        </div>
+
+        <div class="bg-white rounded-2xl p-6 border border-gray-100 hover:shadow-md transition-shadow group">
+          <div class="text-3xl mb-4" aria-hidden="true">🔨</div>
+          <h3 class="font-bold text-gray-900 mb-2">Installation</h3>
+          <p class="text-gray-600 text-sm leading-relaxed mb-4">First-time builder? Alex walks you through the process: tools needed, time estimates, concrete anchor requirements, and common mistakes to avoid.</p>
+          <button onclick="openChat('I\'ve never built anything before. How hard is the installation?'); posthog.capture('topic_click', {variant:'ai-advisor', topic:'installation'})"
+                  class="text-amber-800 font-semibold text-sm hover:underline transition-colors">
+            Ask about installation →
+          </button>
+        </div>
+
+        <div class="bg-white rounded-2xl p-6 border border-gray-100 hover:shadow-md transition-shadow group">
+          <div class="text-3xl mb-4" aria-hidden="true">🌦️</div>
+          <h3 class="font-bold text-gray-900 mb-2">Climate & Materials</h3>
+          <p class="text-gray-600 text-sm leading-relaxed mb-4">Live in a wet climate? A hurricane zone? High UV region? Alex recommends materials that hold up to your local weather — cedar, aluminum, vinyl, or steel.</p>
+          <button onclick="openChat('I live in Florida with high humidity and UV. What material is best?'); posthog.capture('topic_click', {variant:'ai-advisor', topic:'climate'})"
+                  class="text-amber-800 font-semibold text-sm hover:underline transition-colors">
+            Ask about your climate →
+          </button>
+        </div>
+
+        <div class="bg-white rounded-2xl p-6 border border-gray-100 hover:shadow-md transition-shadow group">
+          <div class="text-3xl mb-4" aria-hidden="true">📋</div>
+          <h3 class="font-bold text-gray-900 mb-2">Permits & Codes</h3>
+          <p class="text-gray-600 text-sm leading-relaxed mb-4">Alex knows which structures typically require permits and can help you understand what questions to ask your local building department.</p>
+          <button onclick="openChat('Do I need a permit for a freestanding pergola in my backyard?'); posthog.capture('topic_click', {variant:'ai-advisor', topic:'permits'})"
+                  class="text-amber-800 font-semibold text-sm hover:underline transition-colors">
+            Ask about permits →
+          </button>
+        </div>
+
+        <div class="bg-white rounded-2xl p-6 border border-gray-100 hover:shadow-md transition-shadow group">
+          <div class="text-3xl mb-4" aria-hidden="true">💰</div>
+          <h3 class="font-bold text-gray-900 mb-2">Budget & Value</h3>
+          <p class="text-gray-600 text-sm leading-relaxed mb-4">Share your budget and priorities and Alex will show you which pergola gives you the best combination of quality, durability, and total cost of ownership.</p>
+          <button onclick="openChat('I have a $1,500 budget. What\'s my best option?'); posthog.capture('topic_click', {variant:'ai-advisor', topic:'budget'})"
+                  class="text-amber-800 font-semibold text-sm hover:underline transition-colors">
+            Ask about your budget →
+          </button>
+        </div>
+
+      </div>
+
+      <div class="text-center mt-12">
+        <button onclick="openChat(); posthog.capture('cta_click', {variant:'ai-advisor', location:'what-alex-does'})"
+                class="bg-amber-800 hover:bg-amber-900 text-white font-extrabold px-10 py-4 rounded-2xl text-lg transition-colors shadow-lg">
+          💬 Start Chatting with Alex
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sample Conversation Mockup -->
+  <section id="conversation" class="py-20 bg-white">
+    <div class="max-w-5xl mx-auto px-4">
+      <h2 class="text-3xl md:text-4xl font-extrabold text-center mb-3">See Alex in Action</h2>
+      <p class="text-center text-gray-500 mb-14">A real example of what Alex can do for you</p>
+
+      <div class="grid md:grid-cols-2 gap-10 items-start">
+
+        <!-- Conversation mockup -->
+        <div class="bg-gray-50 rounded-3xl overflow-hidden border border-gray-200 shadow-lg">
+          <!-- Header -->
+          <div class="bg-amber-800 px-5 py-4 flex items-center gap-3">
+            <div class="w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center text-xl shrink-0">🌿</div>
+            <div>
+              <div class="font-bold text-white text-sm">Alex — Pergola Advisor</div>
+              <div class="text-amber-200 text-xs">AI-powered · replies instantly</div>
+            </div>
+            <div class="ml-auto flex items-center gap-1.5">
+              <div class="w-2 h-2 bg-green-400 rounded-full"></div>
+              <span class="text-green-300 text-xs">Online</span>
+            </div>
+          </div>
+
+          <!-- Messages -->
+          <div class="p-5 space-y-4 bg-gray-50 min-h-64">
+
+            <div class="flex gap-3">
+              <div class="w-8 h-8 bg-amber-100 rounded-full flex items-center justify-center text-base shrink-0 mt-0.5">🌿</div>
+              <div class="bg-white rounded-2xl rounded-tl-sm px-4 py-3 text-sm text-gray-700 shadow-sm max-w-xs leading-relaxed">
+                Hi! I'm Alex, your pergola advisor. What's your backyard situation?
+              </div>
+            </div>
+
+            <div class="flex justify-end">
+              <div class="bg-amber-800 rounded-2xl rounded-tr-sm px-4 py-3 text-sm text-white max-w-xs leading-relaxed">
+                We have a 12×14 concrete patio. HOA says no wood, must match house color (gray/charcoal). Budget around $3,000.
+              </div>
+            </div>
+
+            <div class="flex gap-3">
+              <div class="w-8 h-8 bg-amber-100 rounded-full flex items-center justify-center text-base shrink-0 mt-0.5">🌿</div>
+              <div class="bg-white rounded-2xl rounded-tl-sm px-4 py-3 text-sm text-gray-700 shadow-sm max-w-xs leading-relaxed">
+                Got it — your HOA restricts wood, so our <strong>Modern Aluminum 12×16 ($2,499)</strong> is a great fit. It's available in Charcoal Gray, rust-proof, and comes with a 10-year warranty.
+              </div>
+            </div>
+
+            <div class="flex justify-end">
+              <div class="bg-amber-800 rounded-2xl rounded-tr-sm px-4 py-3 text-sm text-white max-w-xs leading-relaxed">
+                Will it actually fit a 12×14 patio? Won't it hang over?
+              </div>
+            </div>
+
+            <div class="flex gap-3">
+              <div class="w-8 h-8 bg-amber-100 rounded-full flex items-center justify-center text-base shrink-0 mt-0.5">🌿</div>
+              <div class="bg-white rounded-2xl rounded-tl-sm px-4 py-3 text-sm text-gray-700 shadow-sm max-w-xs leading-relaxed">
+                Good question. The 12×16 means the posts sit at 12×16 — the rafters extend slightly beyond. On a 12×14 patio the 2 ft overhang on each end looks intentional and provides extra shade. Most customers love it. I'd actually recommend it over the smaller model for your space.
+              </div>
+            </div>
+
+            <div class="flex justify-end">
+              <div class="bg-amber-800 rounded-2xl rounded-tr-sm px-4 py-3 text-sm text-white max-w-xs leading-relaxed">
+                Do I need a permit for this?
+              </div>
+            </div>
+
+            <div class="flex gap-3">
+              <div class="w-8 h-8 bg-amber-100 rounded-full flex items-center justify-center text-base shrink-0 mt-0.5">🌿</div>
+              <div class="bg-white rounded-2xl rounded-tl-sm px-4 py-3 text-sm text-gray-700 shadow-sm max-w-xs leading-relaxed">
+                For a freestanding pergola under 200 sq ft, most jurisdictions don't require a permit. A 12×16 = 192 sq ft, so you're likely just under the threshold. Check with your local building dept to confirm — they're usually helpful for quick questions like this.
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Input -->
+          <div class="bg-white border-t border-gray-200 p-4 flex items-center gap-3">
+            <div class="flex-1 border border-gray-200 rounded-full px-4 py-2 text-sm text-gray-400">Ask Alex anything…</div>
+            <div class="w-8 h-8 bg-amber-800 rounded-full flex items-center justify-center text-white text-sm shrink-0 cursor-pointer">↑</div>
+          </div>
+        </div>
+
+        <!-- Commentary -->
+        <div class="space-y-6">
+          <div class="border-l-4 border-amber-400 pl-5">
+            <div class="font-bold text-gray-900 mb-1">Specific, not generic</div>
+            <p class="text-gray-600 text-sm leading-relaxed">Alex gave a model name, SKU, price, and color — not a vague "we have many options." That's the kind of answer that moves buyers forward.</p>
+          </div>
+          <div class="border-l-4 border-amber-400 pl-5">
+            <div class="font-bold text-gray-900 mb-1">Handles objections honestly</div>
+            <p class="text-gray-600 text-sm leading-relaxed">When asked about overhang, Alex didn't dodge it. He explained the measurement system clearly and reframed the overhang as a feature — accurately.</p>
+          </div>
+          <div class="border-l-4 border-amber-400 pl-5">
+            <div class="font-bold text-gray-900 mb-1">Knows what he doesn't know</div>
+            <p class="text-gray-600 text-sm leading-relaxed">Rather than guessing on the permit question, Alex gave the likely answer and told the customer to verify locally. That's how you build trust.</p>
+          </div>
+          <div class="border-l-4 border-amber-400 pl-5">
+            <div class="font-bold text-gray-900 mb-1">Not a sales bot</div>
+            <p class="text-gray-600 text-sm leading-relaxed">Alex doesn't push the most expensive option. He recommended the $2,499 model because it genuinely fits the customer's needs, not because of margin.</p>
+          </div>
+
+          <div class="bg-amber-50 rounded-2xl p-5 border border-amber-200">
+            <div class="font-bold text-amber-900 mb-2">Ready to talk to Alex?</div>
+            <p class="text-amber-800 text-sm mb-4">Describe your space, budget, or HOA restrictions — Alex will give you a real recommendation in seconds.</p>
+            <button onclick="openChat('Hi Alex! I want to find the right pergola for my backyard.'); posthog.capture('cta_click', {variant:'ai-advisor', location:'conversation-section'})"
+                    class="w-full bg-amber-800 hover:bg-amber-900 text-white font-bold py-3 rounded-xl transition-colors">
+              💬 Start My Conversation
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Products -->
+  <section id="products" class="py-20 bg-gray-50">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-3xl md:text-4xl font-extrabold text-center mb-3">Alex's Top Recommendations</h2>
+      <p class="text-center text-gray-500 mb-14">Every product Alex knows inside out — from $799</p>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <div class="bg-white border border-gray-200 rounded-3xl overflow-hidden hover:shadow-lg transition-all hover:-translate-y-0.5">
+          <img src="https://placehold.co/400x220/92400e/fff?text=Classic+Cedar+10x12" alt="Classic Cedar Pergola" class="w-full">
+          <div class="p-5">
+            <h3 class="font-bold text-gray-900 mb-1">Classic Cedar 10×12</h3>
+            <div class="text-xs text-gray-500 mb-3">⭐ 4.7 (142) · Ships 7 days · 5yr warranty</div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-2xl font-extrabold text-amber-800">$1,299</span>
+              <button onclick="openChat('Tell me about the Classic Cedar 10x12 and whether it\'s right for me')"
+                      class="text-xs bg-amber-50 text-amber-800 font-semibold px-3 py-1.5 rounded-full hover:bg-amber-100 transition-colors">
+                Ask Alex
+              </button>
+            </div>
+            <a href="https://buy.stripe.com/test_placeholder"
+               onclick="posthog.capture('product_click', {variant:'ai-advisor', product:'cedar-1012'})"
+               class="block w-full bg-amber-800 hover:bg-amber-900 text-white text-center font-bold py-3 rounded-xl transition-colors">
+              Order Now
+            </a>
+          </div>
+        </div>
+
+        <div class="bg-white border-2 border-amber-400 rounded-3xl overflow-hidden hover:shadow-lg transition-all hover:-translate-y-0.5 relative">
+          <div class="absolute top-3 left-3 z-10 bg-amber-500 text-white text-xs font-bold px-3 py-1 rounded-full">
+            🌟 Most Asked About
+          </div>
+          <img src="https://placehold.co/400x220/374151/fff?text=Modern+Aluminum+12x16" alt="Modern Aluminum Pergola" class="w-full">
+          <div class="p-5">
+            <h3 class="font-bold text-gray-900 mb-1">Modern Aluminum 12×16</h3>
+            <div class="text-xs text-gray-500 mb-3">⭐ 4.8 (89) · Ships 10 days · 10yr warranty</div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-2xl font-extrabold text-amber-800">$2,499</span>
+              <button onclick="openChat('What makes the Modern Aluminum 12x16 so popular? Is it right for my backyard?')"
+                      class="text-xs bg-amber-50 text-amber-800 font-semibold px-3 py-1.5 rounded-full hover:bg-amber-100 transition-colors">
+                Ask Alex
+              </button>
+            </div>
+            <a href="https://buy.stripe.com/test_placeholder"
+               onclick="posthog.capture('product_click', {variant:'ai-advisor', product:'aluminum-1216'})"
+               class="block w-full bg-amber-800 hover:bg-amber-900 text-white text-center font-bold py-3 rounded-xl transition-colors">
+              Order Now
+            </a>
+          </div>
+        </div>
+
+        <div class="bg-white border border-gray-200 rounded-3xl overflow-hidden hover:shadow-lg transition-all hover:-translate-y-0.5">
+          <img src="https://placehold.co/400x220/0369a1/fff?text=Louvered+12x14" alt="Louvered Pergola" class="w-full">
+          <div class="p-5">
+            <h3 class="font-bold text-gray-900 mb-1">Freestanding Louvered 12×14</h3>
+            <div class="text-xs text-gray-500 mb-3">⭐ 4.9 (31) · Ships 14 days · Motorized louvers</div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-2xl font-extrabold text-amber-800">$4,299</span>
+              <button onclick="openChat('How do the motorized louvers work? Is the louvered pergola worth the extra cost?')"
+                      class="text-xs bg-amber-50 text-amber-800 font-semibold px-3 py-1.5 rounded-full hover:bg-amber-100 transition-colors">
+                Ask Alex
+              </button>
+            </div>
+            <a href="https://buy.stripe.com/test_placeholder"
+               onclick="posthog.capture('product_click', {variant:'ai-advisor', product:'louvered-1214'})"
+               class="block w-full bg-amber-800 hover:bg-amber-900 text-white text-center font-bold py-3 rounded-xl transition-colors">
+              Order Now
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="text-center mt-8">
+        <a href="../index.html" class="text-amber-800 hover:text-amber-900 font-semibold underline underline-offset-2 text-sm">
+          View all 6 models with full specs →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="py-24 bg-gradient-to-br from-amber-950 to-slate-900 text-white text-center">
+    <div class="max-w-2xl mx-auto px-4">
+      <div class="w-20 h-20 bg-amber-100 rounded-full flex items-center justify-center text-4xl mx-auto mb-8 shadow-xl">🌿</div>
+      <h2 class="text-4xl md:text-5xl font-extrabold mb-5 leading-tight">
+        Your Pergola Questions<br>Deserve Real Answers
+      </h2>
+      <p class="text-amber-200 text-lg mb-10 leading-relaxed">
+        Alex is available right now — no appointment, no phone hold, no waiting for a quote. Just type your question and get an expert answer in seconds.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <button
+          onclick="openChat(); posthog.capture('cta_click', {variant:'ai-advisor', location:'footer-cta'})"
+          class="bg-amber-400 hover:bg-amber-300 text-amber-950 font-extrabold px-10 py-5 rounded-2xl text-xl transition-colors shadow-2xl">
+          💬 Talk to Alex — Free
+        </button>
+        <a href="https://buy.stripe.com/test_placeholder"
+           onclick="posthog.capture('cta_click', {variant:'ai-advisor', location:'footer-cta', action:'shop'})"
+           class="border-2 border-amber-300/60 text-amber-100 font-semibold px-10 py-5 rounded-2xl text-xl hover:bg-white/10 transition-colors">
+          Shop Pergolas →
+        </a>
+      </div>
+      <p class="text-amber-400/60 text-sm mt-6">
+        Pergolas from $799 · Free shipping · 30-day returns
+      </p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-950 text-gray-500 py-10">
+    <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4 text-sm">
+      <div class="flex items-center gap-2">
+        <span class="text-xl" aria-hidden="true">🌿</span>
+        <span class="font-bold text-white">Pergola Pros</span>
+      </div>
+      <div>© 2026 Pergola Pros. All rights reserved.</div>
+      <div class="flex gap-5">
+        <a href="#" class="hover:text-white transition-colors">Privacy</a>
+        <a href="#" class="hover:text-white transition-colors">Terms</a>
+        <a href="#" class="hover:text-white transition-colors">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Chat Widget -->
+  <script src="../chat-widget.js"></script>
+
+  <script>
+    posthog.capture('page_view', { variant: 'ai-advisor' });
+
+    // Auto-open chat after 5 seconds with Alex's greeting already visible
+    var autoOpenFired = false;
+    setTimeout(function () {
+      if (autoOpenFired) return;
+      autoOpenFired = true;
+      if (typeof openChat === 'function') {
+        openChat();
+        posthog.capture('chat_auto_open', { variant: 'ai-advisor', delay_seconds: 5 });
+      }
+    }, 5000);
+
+    // Cancel auto-open if user already opened chat manually
+    document.addEventListener('click', function (e) {
+      if (e.target && (e.target.id === 'pp-btn' || e.target.closest('#pp-win'))) {
+        autoOpenFired = true;
+      }
+    });
+  </script>
+</body>
+</html>
