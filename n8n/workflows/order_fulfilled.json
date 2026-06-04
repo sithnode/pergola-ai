@@ -1,0 +1,73 @@
+{
+  "name": "Order Fulfilled — Notify Customer with Tracking",
+  "active": false,
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "order-fulfilled",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "node-webhook",
+      "name": "Fulfillment Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "url": "=http://agent:8000/orders/{{ $json.order_id }}/status",
+        "method": "PATCH",
+        "sendBody": true,
+        "bodyContentType": "json",
+        "jsonBody": "={\"status\": \"shipped\", \"tracking_number\": \"{{ $json.tracking_number }}\", \"carrier\": \"{{ $json.carrier }}\"}"
+      },
+      "id": "node-update-order",
+      "name": "Update Order Status",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "fromEmail": "={{ $env.FROM_EMAIL }}",
+        "toEmail": "={{ $json.customer_email }}",
+        "subject": "Your Pergola Has Shipped! — {{ $json.order_id }}",
+        "text": "Great news — your pergola is on its way!\n\nOrder: {{ $json.order_id }}\nCarrier: {{ $json.carrier }}\nTracking: {{ $json.tracking_number }}\n\nExpect delivery within 3–5 business days after shipment.\n\n— Pergola Paradise"
+      },
+      "id": "node-email",
+      "name": "Send Tracking Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2,
+      "position": [680, 300],
+      "credentials": {
+        "smtp": { "id": "smtp-creds", "name": "SMTP Account" }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{\"status\": \"notified\"}"
+      },
+      "id": "node-respond",
+      "name": "Respond OK",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [900, 300]
+    }
+  ],
+  "connections": {
+    "Fulfillment Webhook": {
+      "main": [[{ "node": "Update Order Status", "type": "main", "index": 0 }]]
+    },
+    "Update Order Status": {
+      "main": [[{ "node": "Send Tracking Email", "type": "main", "index": 0 }]]
+    },
+    "Send Tracking Email": {
+      "main": [[{ "node": "Respond OK", "type": "main", "index": 0 }]]
+    }
+  },
+  "settings": { "executionOrder": "v1" },
+  "tags": ["orders", "fulfillment"]
+}

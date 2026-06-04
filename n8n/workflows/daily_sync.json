@@ -1,0 +1,88 @@
+{
+  "name": "Daily Inventory & Pricing Sync",
+  "active": false,
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [{ "field": "cronExpression", "expression": "0 6 * * *" }]
+        }
+      },
+      "id": "node-cron",
+      "name": "Daily at 6 AM",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "url": "http://agent:8000/catalog/sync",
+        "method": "POST",
+        "options": { "timeout": 60000 }
+      },
+      "id": "node-sync",
+      "name": "Trigger Catalog Sync",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [
+            {
+              "value1": "={{ $json.updated_count }}",
+              "operation": "largerEqual",
+              "value2": 1
+            }
+          ]
+        }
+      },
+      "id": "node-check",
+      "name": "Any Updates?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [680, 300]
+    },
+    {
+      "parameters": {
+        "fromEmail": "={{ $env.FROM_EMAIL }}",
+        "toEmail": "={{ $env.ADMIN_EMAIL }}",
+        "subject": "Catalog Sync — {{ $json.updated_count }} products updated",
+        "text": "Daily catalog sync completed.\n\nUpdated: {{ $json.updated_count }} product(s)\nTimestamp: {{ $json.synced_at }}\n\nReview at http://localhost:8000/products"
+      },
+      "id": "node-notify-admin",
+      "name": "Notify Admin",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2,
+      "position": [900, 200],
+      "credentials": {
+        "smtp": { "id": "smtp-creds", "name": "SMTP Account" }
+      }
+    },
+    {
+      "parameters": {},
+      "id": "node-noop",
+      "name": "No Changes",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [900, 400]
+    }
+  ],
+  "connections": {
+    "Daily at 6 AM": {
+      "main": [[{ "node": "Trigger Catalog Sync", "type": "main", "index": 0 }]]
+    },
+    "Trigger Catalog Sync": {
+      "main": [[{ "node": "Any Updates?", "type": "main", "index": 0 }]]
+    },
+    "Any Updates?": {
+      "main": [
+        [{ "node": "Notify Admin", "type": "main", "index": 0 }],
+        [{ "node": "No Changes", "type": "main", "index": 0 }]
+      ]
+    }
+  },
+  "settings": { "executionOrder": "v1" },
+  "tags": ["catalog", "sync", "scheduled"]
+}

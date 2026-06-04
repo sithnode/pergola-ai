@@ -1,0 +1,50 @@
+version: "3.9"
+
+services:
+  agent:
+    build: ./agent
+    ports:
+      - "${AGENT_PORT:-8000}:8000"
+    environment:
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - CORS_ORIGINS=${CORS_ORIGINS:-*}
+      - ENVIRONMENT=${ENVIRONMENT:-development}
+      - N8N_WEBHOOK_URL=${N8N_WEBHOOK_URL:-http://n8n:5678}
+      - SENDGRID_API_KEY=${SENDGRID_API_KEY:-}
+      - FROM_EMAIL=${FROM_EMAIL:-sales@pergola-paradise.com}
+    volumes:
+      - ./catalog:/app/catalog:ro
+      - ./orders:/app/orders
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  storefront:
+    image: nginx:alpine
+    ports:
+      - "8080:80"
+    volumes:
+      - ./storefront:/usr/share/nginx/html:ro
+    restart: unless-stopped
+    depends_on:
+      - agent
+
+  n8n:
+    image: n8nio/n8n:latest
+    ports:
+      - "5678:5678"
+    environment:
+      - N8N_BASIC_AUTH_ACTIVE=true
+      - N8N_BASIC_AUTH_USER=${N8N_USER:-admin}
+      - N8N_BASIC_AUTH_PASSWORD=${N8N_PASSWORD:-changeme}
+      - WEBHOOK_URL=${N8N_WEBHOOK_URL:-http://localhost:5678}
+      - N8N_LOG_LEVEL=info
+    volumes:
+      - n8n_data:/home/node/.n8n
+    restart: unless-stopped
+
+volumes:
+  n8n_data:

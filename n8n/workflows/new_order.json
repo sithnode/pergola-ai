@@ -1,0 +1,95 @@
+{
+  "name": "New Order — Notify Customer & Forward to Supplier",
+  "active": false,
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "new-order",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "node-webhook",
+      "name": "Order Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json.order_id}}",
+              "operation": "isNotEmpty"
+            }
+          ]
+        }
+      },
+      "id": "node-validate",
+      "name": "Validate Payload",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "fromEmail": "={{ $env.FROM_EMAIL }}",
+        "toEmail": "={{ $json.customer.email }}",
+        "subject": "Order Confirmed — {{ $json.order_id }}",
+        "text": "Hi {{ $json.customer.name }},\n\nYour order {{ $json.order_id }} has been placed successfully!\n\nTotal: ${{ $json.total }}\n\nWe'll email you tracking info when your pergola ships.\n\n— Pergola Paradise"
+      },
+      "id": "node-email-customer",
+      "name": "Email Customer",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2,
+      "position": [680, 200],
+      "credentials": {
+        "smtp": { "id": "smtp-creds", "name": "SMTP Account" }
+      }
+    },
+    {
+      "parameters": {
+        "url": "={{ $env.SUPPLIER_API_URL }}/orders",
+        "method": "POST",
+        "sendBody": true,
+        "bodyContentType": "json",
+        "jsonBody": "={{ JSON.stringify($json) }}"
+      },
+      "id": "node-supplier",
+      "name": "Forward to Supplier",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [680, 380]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{\"status\": \"processed\"}"
+      },
+      "id": "node-respond",
+      "name": "Respond OK",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [900, 300]
+    }
+  ],
+  "connections": {
+    "Order Webhook": {
+      "main": [[{ "node": "Validate Payload", "type": "main", "index": 0 }]]
+    },
+    "Validate Payload": {
+      "main": [
+        [
+          { "node": "Email Customer", "type": "main", "index": 0 },
+          { "node": "Forward to Supplier", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Email Customer": {
+      "main": [[{ "node": "Respond OK", "type": "main", "index": 0 }]]
+    }
+  },
+  "settings": { "executionOrder": "v1" },
+  "tags": ["orders", "notifications"]
+}
